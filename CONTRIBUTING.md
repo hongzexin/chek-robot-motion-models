@@ -49,6 +49,7 @@
 
 ```bash
 python3 scripts/validate_links.py
+python3 scripts/generate_catalog.py
 ```
 
 如果你想额外检查远程链接：
@@ -67,9 +68,26 @@ python3 scripts/validate_links.py --check-http
 - 哪些信息是确认的
 - 哪些信息仍需二次核验
 
+## 目录生成 / Catalog generation
+
+这个仓库现在采用“根目录导航 + 内容目录分条目”的结构。
+
+请在更新数据后同步执行：
+
+```bash
+python3 scripts/generate_catalog.py
+```
+
+它会自动刷新：
+
+- `motion-models/`
+- `brands/`
+- `downloads/`
+- `categories/`
+- 根目录 `README.md`
+
 ## 社区入口 / Community entry
 
 如果你不只是想提 PR，也想发讨论、收需求、找搭子或交流部署经验，欢迎进入：
 
 [app-dev.chekkk.com](https://app-dev.chekkk.com)
-

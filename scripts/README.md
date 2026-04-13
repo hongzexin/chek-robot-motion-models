@@ -33,3 +33,20 @@ python3 scripts/validate_links.py --check-http
 - `--check-http` 会访问远程链接，适合在提交前做一次增强检查
 - 当前以 `models.json` 为主数据源，`models.csv` 作为同步导出视图
 
+## `generate_catalog.py`
+
+用于把机器可读数据生成成更适合 GitHub 浏览的目录结构，参考 `awesome-design-md` 的“内容目录按条目展开”思路。
+
+会自动生成：
+
+- `motion-models/`
+- `brands/`
+- `downloads/`
+- `categories/`
+- 根目录 `README.md`
+
+用法：
+
+```bash
+python3 scripts/generate_catalog.py
+```
