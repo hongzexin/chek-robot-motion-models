@@ -14,6 +14,17 @@
 
 This repository is an index, not a mirror of third-party checkpoints. We focus on discoverability, tagging, comparability, and community contribution.
 
+当前已开始覆盖的品牌和平台包括：
+
+- Unitree
+- OpenLoong
+- Booster Robotics
+- ANYbotics / ANYmal ecosystem
+- AgiBot
+- AgileX
+- Franka
+- Multi-brand foundation model routes
+
 ## 为什么做这个仓库 / Why this repo exists
 
 最近公开网上关于机器人动作模型的内容越来越多，但真正对人有帮助的索引并不多。
@@ -90,14 +101,37 @@ This repository is an index, not a mirror of third-party checkpoints. We focus o
 | 多动作 tracker | Unitree G1 | `OpenTrack general_tracker_lafan_v1` | repo_entry | cartwheel / kungfu / getup 等都可覆盖 |
 | 官方部署起点 | Unitree Go2 / G1 / H1 | `unitree_rl_gym` | repo_entry | 适合先打通官方 RL 和部署环境 |
 | 操作类任务 | Unitree G1 | `GR00T-N1.6-G1-PnPAppleToPlate` | model_page | 更适合展示“机器人真的在做事” |
+| 整身控制底座 | OpenLoong Qinglong | `OpenLoong-Dyn-Control` | repo_entry | 适合看真实控制软件栈，而不只是动作片段 |
+| 官方 locomotion 框架 | Booster T1 / K1 | `booster_gym` | repo_entry | 适合做非 Unitree 人形 locomotion 路线探索 |
+| 开放操作模型 | Franka | `MolmoAct-7B-D-0812` | model_page | 适合作为机械臂 manipulation / VLA 入口 |
+| 跨本体基础模型 | AgileX / R1-Lite / Franka | `RoboBrain-X0-Preview` | model_page | 适合看多品牌、多本体基础模型路线 |
 
-## 按机器人型号筛选 / Filter by robot model
+## 按品牌或机器人型号筛选 / Filter by brand or robot model
 
 | 型号 / Model | 先看这些 / Start here |
 | --- | --- |
 | G1 | `exptech/g1-moves` · `mujocolab/g1_spinkick_example` · `OpenTrack` · `PathOn-AI/g1-imitate-isaaclab-amp` · `unitree-g1-phase1-locomotion` |
 | H1 | `HoloMotion v1.2` |
 | Go2 | `unitree_rl_gym` · `diasAiMaster/unitree-go2-velocity-flat` |
+| OpenLoong Qinglong | `OpenLoong-Dyn-Control` · `OpenLoong-Gymloong` |
+| Booster T1 / K1 | `booster_gym` · `robocup_demo` |
+| ANYmal | `legged_gym` |
+| AgiBot GO-1 | `agibot-world/GO-1` |
+| AgileX manipulation platforms | `lerobot/xvla-agibot-world` · `RoboBrain-X0-Preview` |
+| Franka | `MolmoAct-7B-D-0812` · `RoboBrain-X0-Preview` |
+
+## 品牌覆盖速览 / Brand coverage snapshot
+
+| 品牌 / Brand | 代表条目 / Representative entries | 主要方向 / Main direction |
+| --- | --- | --- |
+| Unitree | `exptech/g1-moves` · `unitree_rl_gym` · `GR00T-N1.6-G1-PnPAppleToPlate` | showcase / locomotion / manipulation |
+| OpenLoong | `OpenLoong-Dyn-Control` · `OpenLoong-Gymloong` | whole-body control / locomotion |
+| Booster Robotics | `booster_gym` · `robocup_demo` | locomotion / task demo |
+| ANYbotics | `legged_gym` | legged locomotion |
+| AgiBot | `agibot-world/GO-1` | foundation model |
+| AgileX | `lerobot/xvla-agibot-world` | manipulation / VLA |
+| Franka | `MolmoAct-7B-D-0812` | manipulation / VLA |
+| Multi-brand | `RoboBrain-X0-Preview` | cross-embodiment foundation model |
 
 ## 按业务场景筛选 / Filter by business scenario
 
@@ -163,7 +197,7 @@ This repository is an index, not a mirror of third-party checkpoints. We focus o
 
 - [x] 建立首版模型索引
 - [x] 建立统一 schema、标签规则和贡献流程
-- [ ] 增加更多非 Unitree 品牌条目
+- [x] 增加更多非 Unitree 品牌条目
 - [ ] 增加“数据集 vs 模型 vs 演示页”的单独字段
 - [ ] 增加自动化链接巡检
 - [ ] 增加 demo-friendliness 和商演适配度的社区评分
@@ -178,4 +212,3 @@ This repository is an index, not a mirror of third-party checkpoints. We focus o
 最后，如果你希望把这些模型线索进一步转成社区讨论、搭子帖子、需求撮合或合作入口，欢迎进入：
 
 [app-dev.chekkk.com](https://app-dev.chekkk.com)
-
