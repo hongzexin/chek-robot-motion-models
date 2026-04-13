@@ -1,0 +1,54 @@
+name: Link Fix Report
+description: 报告某个条目的链接失效、权限变化或下载方式变化
+title: "[Link Fix] "
+labels:
+  - link-fix
+body:
+  - type: markdown
+    attributes:
+      value: |
+        如果你发现某个条目“以前能开，现在不行了”，请尽量附上原入口和新的现象。
+  - type: input
+    id: entry_name
+    attributes:
+      label: 条目名称 / Entry name
+      placeholder: 例如 rsamf/g1-dance
+    validations:
+      required: true
+  - type: input
+    id: broken_url
+    attributes:
+      label: 当前有问题的链接 / Problematic URL
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: 问题类型 / Issue type
+      options:
+        - 404 / Not found
+        - 401 / 403 / Requires login
+        - Redirect changed
+        - Weight file removed
+        - Model page still exists but files changed
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 现象描述 / What happened
+      placeholder: 例如 打开后变成 gated、文件名变了、仓库归档了
+    validations:
+      required: true
+  - type: input
+    id: replacement_url
+    attributes:
+      label: 可替代链接 / Replacement URL
+      placeholder: 如果你有新的链接，请填这里
+  - type: textarea
+    id: notes
+    attributes:
+      label: 其他备注 / Extra notes
+

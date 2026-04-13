@@ -22,6 +22,7 @@ MOTION_MODELS_DIR = REPO_ROOT / "motion-models"
 BRANDS_DIR = REPO_ROOT / "brands"
 DOWNLOADS_DIR = REPO_ROOT / "downloads"
 CATEGORIES_DIR = REPO_ROOT / "categories"
+FEATURED_DIR = REPO_ROOT / "featured"
 
 
 def slugify(value: str) -> str:
@@ -208,6 +209,71 @@ def categories_markdown(groups: dict[str, list[dict]]) -> str:
     return "\n".join(sections)
 
 
+def featured_markdown(records: list[dict]) -> str:
+    def sort_key(item: dict) -> tuple:
+        return (item["download_type"] != "direct_file", item["robot_brand"], item["name"])
+
+    demo_friendly = sorted(
+        [item for item in records if item["deployment_readiness"] == "demo_friendly"],
+        key=sort_key,
+    )
+    direct_files = sorted(
+        [item for item in records if item["download_type"] == "direct_file"],
+        key=sort_key,
+    )
+    official_entries = sorted(
+        [item for item in records if item["is_official"]],
+        key=lambda item: (item["robot_brand"], item["name"]),
+    )
+    manipulation_entries = sorted(
+        [
+            item
+            for item in records
+            if item["category_level_1"] in {"manipulation", "task_policy"}
+        ],
+        key=lambda item: (item["robot_brand"], item["name"]),
+    )
+    showcase_entries = sorted(
+        [item for item in records if item["category_level_1"] == "showcase"],
+        key=sort_key,
+    )
+
+    sections = [
+        "# Featured",
+        "",
+        "给“想快速找能下的、能演示的、能做商演参考的资源”的入口页。",
+        "",
+        "This page is optimized for people who want the shortest path to demo-friendly, downloadable, or official resources.",
+        "",
+        "## 适合先试 / Quickest starting points",
+        "",
+        make_item_table(direct_files[:8], Path("../motion-models")) if direct_files else "暂无条目。",
+        "",
+        "## 适合展会 / 商演 / 吸睛演示 / Best for demos and showcase",
+        "",
+        make_item_table(demo_friendly[:10], Path("../motion-models")) if demo_friendly else "暂无条目。",
+        "",
+        "## 展示动作优先 / Showcase-first picks",
+        "",
+        make_item_table(showcase_entries[:10], Path("../motion-models")) if showcase_entries else "暂无条目。",
+        "",
+        "## 官方或机构入口 / Official or institution-backed entries",
+        "",
+        make_item_table(official_entries[:12], Path("../motion-models")) if official_entries else "暂无条目。",
+        "",
+        "## 操作 / 任务动作 / Manipulation and task policies",
+        "",
+        make_item_table(manipulation_entries[:12], Path("../motion-models")) if manipulation_entries else "暂无条目。",
+        "",
+        "## 说明 / Notes",
+        "",
+        "- 这里的“推荐”是为了缩短检索路径，不代表这些资源一定能一键上真机。",
+        "- 真机可用性仍然取决于 DOF、控制频率、观测定义、执行栈和安全边界。",
+        "- 社区入口：[app-dev.chekkk.com](https://app-dev.chekkk.com)",
+    ]
+    return "\n".join(sections)
+
+
 def motion_models_index_markdown(records: list[dict]) -> str:
     sorted_records = sorted(records, key=lambda item: (item["robot_brand"], item["robot_model"], item["name"]))
     table = make_item_table(sorted_records, Path("."))
@@ -262,6 +328,7 @@ def root_readme_markdown(records: list[dict]) -> str:
 
 - 根目录 `README.md` 负责总导航
 - [`motion-models/`](./motion-models/README.md) 里每个资源一个文件夹，点进去就能看下载入口和风险说明
+- [`featured/`](./featured/README.md) 提供商演、快速试、官方入口等短路径推荐
 - [`brands/`](./brands/README.md) 按品牌聚合，方便横向比较
 - [`downloads/`](./downloads/README.md) 按下载方式聚合，方便先找直链或 gated 资源
 - [`categories/`](./categories/README.md) 按能力路线聚合，方便看 showcase、locomotion、manipulation、foundation motion
@@ -270,6 +337,7 @@ def root_readme_markdown(records: list[dict]) -> str:
 ## 快速入口 / Quick entry points
 
 - [全部条目 / All entries](./motion-models/README.md)
+- [推荐入口 / Featured picks](./featured/README.md)
 - [按品牌浏览 / Browse by brand](./brands/README.md)
 - [按下载方式浏览 / Browse by access type](./downloads/README.md)
 - [按分类浏览 / Browse by category](./categories/README.md)
@@ -288,6 +356,7 @@ def root_readme_markdown(records: list[dict]) -> str:
 ```text
 .
 ├── README.md                # 总导航
+├── featured/                # 推荐入口与短路径导航
 ├── motion-models/           # 每个资源一个文件夹
 ├── brands/                  # 按品牌聚合
 ├── downloads/               # 按下载方式聚合
@@ -330,6 +399,7 @@ def main() -> int:
     recreate_dir(BRANDS_DIR)
     recreate_dir(DOWNLOADS_DIR)
     recreate_dir(CATEGORIES_DIR)
+    recreate_dir(FEATURED_DIR)
 
     brand_groups: dict[str, list[dict]] = defaultdict(list)
     download_groups: dict[str, list[dict]] = defaultdict(list)
@@ -351,6 +421,7 @@ def main() -> int:
     write(BRANDS_DIR / "README.md", brands_index_markdown(brand_groups))
     write(DOWNLOADS_DIR / "README.md", download_markdown(download_groups))
     write(CATEGORIES_DIR / "README.md", categories_markdown(category_groups))
+    write(FEATURED_DIR / "README.md", featured_markdown(records))
     write(REPO_ROOT / "README.md", root_readme_markdown(records))
     return 0
 

@@ -12,6 +12,7 @@
 
 - 根目录 `README.md` 负责总导航
 - [`motion-models/`](./motion-models/README.md) 里每个资源一个文件夹，点进去就能看下载入口和风险说明
+- [`featured/`](./featured/README.md) 提供商演、快速试、官方入口等短路径推荐
 - [`brands/`](./brands/README.md) 按品牌聚合，方便横向比较
 - [`downloads/`](./downloads/README.md) 按下载方式聚合，方便先找直链或 gated 资源
 - [`categories/`](./categories/README.md) 按能力路线聚合，方便看 showcase、locomotion、manipulation、foundation motion
@@ -20,6 +21,7 @@
 ## 快速入口 / Quick entry points
 
 - [全部条目 / All entries](./motion-models/README.md)
+- [推荐入口 / Featured picks](./featured/README.md)
 - [按品牌浏览 / Browse by brand](./brands/README.md)
 - [按下载方式浏览 / Browse by access type](./downloads/README.md)
 - [按分类浏览 / Browse by category](./categories/README.md)
@@ -54,6 +56,7 @@
 ```text
 .
 ├── README.md                # 总导航
+├── featured/                # 推荐入口与短路径导航
 ├── motion-models/           # 每个资源一个文件夹
 ├── brands/                  # 按品牌聚合
 ├── downloads/               # 按下载方式聚合

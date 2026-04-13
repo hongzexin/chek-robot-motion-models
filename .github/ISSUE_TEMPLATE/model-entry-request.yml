@@ -1,0 +1,95 @@
+name: Model Entry Request
+description: 建议收录一个新的机器人动作模型 / 控制模型 / 任务模型
+title: "[Model Entry] "
+labels:
+  - model-entry
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢补充新条目。请尽量把“能不能下、适配谁、风险是什么”讲清楚。
+  - type: input
+    id: model_name
+    attributes:
+      label: 模型名称 / Resource name
+      placeholder: 例如 exptech/g1-moves
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: 主入口链接 / Primary URL
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 平台 / Platform
+      options:
+        - Hugging Face
+        - GitHub
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: robot_brand
+    attributes:
+      label: 机器人品牌 / Robot brand
+      placeholder: Unitree / OpenLoong / Booster Robotics / Franka ...
+    validations:
+      required: true
+  - type: input
+    id: robot_model
+    attributes:
+      label: 适配机型 / Robot model
+      placeholder: G1 / H1 / Qinglong / T1 / Franka ...
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 一级分类 / Category
+      options:
+        - showcase
+        - motion_imitation
+        - locomotion
+        - manipulation
+        - generative_motion
+        - task_policy
+        - foundation_motion
+    validations:
+      required: true
+  - type: dropdown
+    id: download_type
+    attributes:
+      label: 下载方式 / Access type
+      options:
+        - direct_file
+        - model_page
+        - repo_entry
+        - gated
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: 中文摘要 / Chinese summary
+      description: 用一句话说清楚这个资源是干什么的。
+      placeholder: 适合做什么、像什么、最有价值的点是什么
+    validations:
+      required: true
+  - type: textarea
+    id: risk_note
+    attributes:
+      label: 风险说明 / Risk note
+      description: 请写出关键部署风险、限制或不确定项。
+      placeholder: 例如 需要登录、像模型页入口、真机仍需 DOF 对齐
+    validations:
+      required: true
+  - type: textarea
+    id: extra_notes
+    attributes:
+      label: 其他备注 / Extra notes
+      description: 补充 license、DOF、变体、真机经验或参考说明
+
